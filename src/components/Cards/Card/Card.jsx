@@ -5,17 +5,22 @@ import cx from 'classnames';
 
 import styles from './Card.module.css';
 
-const CardComponent = ({className, cardTitle, value, lastUpdate, cardSubtitle}) => (
+const duration = 1;
+
+const CardComponent = ({className, cardTitle, value, increment, lastUpdate, cardSubtitle}) => (
     <Grid item xs={12} md={3} component={Card} className={cx(styles.card, className)}>
         <CardContent>
             <Typography color="textSecondary" gutterBottom>
                 {cardTitle}
             </Typography>
             <Typography variant="h5" component="h2">
-                <CountUp end={value} duration={1} separator="," />
+                <CountUp end={value} duration={duration} separator="." />
+            </Typography>
+            <Typography>
+                +<CountUp end={increment} duration={duration} separator="."/>
             </Typography>
             <Typography color="textSecondary">
-                {new Date(lastUpdate).toDateString()}
+                {new Date(lastUpdate).toUTCString()}
             </Typography>
             <Typography variant="body2" component="p">
                 {cardSubtitle}

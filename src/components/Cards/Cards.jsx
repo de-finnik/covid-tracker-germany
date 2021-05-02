@@ -3,30 +3,36 @@ import { Grid} from '@material-ui/core';
 import CardComponent from './Card/Card';
 import styles from './Cards.module.css';
 
-const Info = () => {
+const Info = ({data: {cases, recovered, deaths, delta, meta}}) => {
+    if(!cases) {
+        return 'Loading...';
+    }
     return (
         <div className={styles.container}>
             <Grid container spacing={3} justify="center">
                 <CardComponent 
                     className={styles.infected}
                     cardTitle={"Infected"} 
-                    value={55455} 
+                    value={cases} 
+                    increment={delta.cases}
                     cardSubtitle={"Number of active cases"} 
-                    lastUpdate={"2021-04-30T23:00:00.000Z"}
+                    lastUpdate={meta.lastUpdate}
                 />
                 <CardComponent 
                     className={styles.recovered}
                     cardTitle={"Recovered"} 
-                    value={5545454} 
+                    value={recovered} 
+                    increment={delta.recovered}
                     cardSubtitle={"warum nue"} 
-                    lastUpdate={"2021-04-30T23:00:00.000Z"}
+                    lastUpdate={meta.lastUpdate}
                 />
                 <CardComponent 
                     className={styles.deaths}
                     cardTitle={"Deaths"} 
-                    value={554533454} 
+                    value={deaths} 
+                    increment={delta.deaths}
                     cardSubtitle={"warum nue"} 
-                    lastUpdate={"2021-04-30T23:00:00.000Z"}
+                    lastUpdate={meta.lastUpdate}
                 />
             </Grid>
         </div>
